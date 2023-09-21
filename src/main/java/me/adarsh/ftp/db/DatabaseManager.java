@@ -25,22 +25,23 @@ public class DatabaseManager {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        String database = Economy.getInstance().getConfig().getString("mysql.database");
-        String host = Economy.getInstance().getConfig().getString("mysql.host");
-        String port = Economy.getInstance().getConfig().getString("mysql.port");
-        String user = Economy.getInstance().getConfig().getString("mysql.username");
-        String password = Economy.getInstance().getConfig().getString("mysql.password");
-        String url = "jdbc:mysql://"+host+":"+port+"/"+database+"?autoReconnect=true&zeroDateTimeBehavior=convertToNull";
-        try {
-            connection = DriverManager.getConnection(url, user, password);
+        }else {
+            String database = Economy.getInstance().getConfig().getString("mysql.database");
+            String host = Economy.getInstance().getConfig().getString("mysql.host");
+            String port = Economy.getInstance().getConfig().getString("mysql.port");
+            String user = Economy.getInstance().getConfig().getString("mysql.username");
+            String password = Economy.getInstance().getConfig().getString("mysql.password");
+            String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&zeroDateTimeBehavior=convertToNull";
+            try {
+                connection = DriverManager.getConnection(url, user, password);
 
-            try (Statement statement = connection.createStatement()) {
-                String createTableSQL = "CREATE TABLE IF NOT EXISTS balances (username TEXT PRIMARY KEY, balance DOUBLE)";
-                statement.executeUpdate(createTableSQL);
+                try (Statement statement = connection.createStatement()) {
+                    String createTableSQL = "CREATE TABLE IF NOT EXISTS balances (username TEXT PRIMARY KEY, balance DOUBLE)";
+                    statement.executeUpdate(createTableSQL);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
