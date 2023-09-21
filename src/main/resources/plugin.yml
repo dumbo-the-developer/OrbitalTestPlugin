@@ -1,0 +1,6 @@
+name: FreelancerTestPlugin
+version: '${project.version}'
+main: me.adarsh.ftp.Economy
+author: DUMBO
+website: https://adarsh.is-cool.dev/
+api-version: '1.13'
